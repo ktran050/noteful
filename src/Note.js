@@ -11,6 +11,7 @@ class Note extends React.Component {
           </header>
         </Link>
         <p>{this.props.modified}</p>
+        <button>Delete Note</button>
       </div>
     );
   }

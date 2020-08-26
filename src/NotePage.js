@@ -14,6 +14,7 @@ class NotePage extends React.Component {
             </Link>
             <p>{note.modified}</p>
             <p>{note.content}</p>
+            <button>Delete Note</button>
           </div>
         );
       }
