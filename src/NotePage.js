@@ -6,7 +6,7 @@ class NotePage extends React.Component {
     const notes = this.props.notes.map((note, index) => {
       if (note.id === this.props.match.match.params.noteId) {
         return (
-          <div>
+          <div key={index}>
             <Link to={`/note/${note.id}`}>
               <header>
                 <h3>{note.name}</h3>
