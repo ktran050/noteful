@@ -7,11 +7,39 @@ import Heading from "./Heading";
 import MainSidebar from "./MainSidebar";
 import FolderSidebar from "./FolderSidebar";
 import NoteSidebar from "./NoteSidebar";
-import STORE from "./dummy.store";
 import "./App.css";
 
 class App extends React.Component {
-  state = STORE;
+  state = { folders: [], notes: [] };
+  buildURL(option) {
+    const base = "http://localhost:9090/";
+    if (option === 0) return base + "folders";
+    else if (option === 1) return base + "notes";
+    else return base;
+  }
+  componentDidMount() {
+    // call api for folders
+    fetch(this.buildURL(0))
+      .then((result) => {
+        if (!result.ok) console.log("ERROR: fetch failed; result is not ok");
+        else return result.text();
+      })
+      .then((result) => {
+        const parsedResults = JSON.parse(result);
+        this.setState({ folders: parsedResults });
+      });
+
+    // call api for notes
+    fetch(this.buildURL(1))
+      .then((result) => {
+        if (!result.ok) console.log("ERROR: fetch failed; result is not ok");
+        else return result.text();
+      })
+      .then((result) => {
+        const parsedResults = JSON.parse(result);
+        this.setState({ notes: parsedResults });
+      });
+  }
   render() {
     return (
       <div className="App">

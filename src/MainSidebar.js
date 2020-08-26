@@ -3,7 +3,6 @@ import Folder from "./Folder";
 
 class MainSidebar extends React.Component {
   render() {
-    console.log(this.props.folders);
     const folders = this.props.folders.map((folder, index) => (
       <Folder key={folder.id + index} name={folder.name} id={folder.id} />
     ));
