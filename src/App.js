@@ -8,17 +8,18 @@ import MainSidebar from "./MainSidebar";
 import FolderSidebar from "./FolderSidebar";
 import NoteSidebar from "./NoteSidebar";
 import "./App.css";
+import Context from "./Context";
 
 class App extends React.Component {
   state = { folders: [], notes: [] };
-  buildURL(option) {
+  buildURL = (option) => {
     const base = "http://localhost:9090/";
     if (option === 0) return base + "folders";
     else if (option === 1) return base + "notes";
     else return base;
-  }
-  componentDidMount() {
-    // call api for folders
+  };
+
+  updateFolders = () => {
     fetch(this.buildURL(0))
       .then((result) => {
         if (!result.ok) console.log("ERROR: fetch failed; result is not ok");
@@ -28,8 +29,8 @@ class App extends React.Component {
         const parsedResults = JSON.parse(result);
         this.setState({ folders: parsedResults });
       });
-
-    // call api for notes
+  };
+  updateNotes = () => {
     fetch(this.buildURL(1))
       .then((result) => {
         if (!result.ok) console.log("ERROR: fetch failed; result is not ok");
@@ -39,46 +40,97 @@ class App extends React.Component {
         const parsedResults = JSON.parse(result);
         this.setState({ notes: parsedResults });
       });
+  };
+  handleApiDelete = (id) => {
+    const url = `http://localhost:9090/notes/${id}`;
+    fetch(url, { method: "DELETE" });
+    this.forceUpdate();
+  };
+  componentDidMount() {
+    // call api for folders
+    this.updateFolders();
+    // call api for notes
+    this.updateNotes();
   }
   render() {
+    const contextValue = {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      handleApiDelete: this.handleApiDelete,
+    };
     return (
       <div className="App">
         <Heading />
-        <div id="container">
-          <Switch id="sidebar">
-            <Route
-              exact
-              path="/"
-              render={() => <MainSidebar folders={this.state.folders} />}
-            />
-            <Route
-              path="/folder/:folderId"
-              render={(match) => (
-                <FolderSidebar match={match} folders={this.state.folders} />
-              )}
-            />
-            <Route path="/note/:noteId" render={() => <NoteSidebar />} />
-          </Switch>
-          <Switch id="main">
-            <Route
-              exact
-              path="/"
-              render={() => <MainPage notes={this.state.notes} />}
-            />
-            <Route
-              path="/folder/:folderId"
-              render={(match) => (
-                <FolderPage match={match} notes={this.state.notes} />
-              )}
-            />
-            <Route
-              path="/note/:noteId"
-              render={(match) => (
-                <NotePage match={match} notes={this.state.notes} />
-              )}
-            />
-          </Switch>
-        </div>
+        <Context.Provider value={contextValue}>
+          <div id="container">
+            <Switch id="sidebar">
+              <Route
+                exact
+                path="/"
+                component={() => (
+                  <Context.Consumer>
+                    {(value) => <MainSidebar folders={value.folders} />}
+                  </Context.Consumer>
+                )}
+              />
+              <Route
+                path="/folder/:folderId"
+                component={(match) => (
+                  <Context.Consumer>
+                    {(value) => (
+                      <FolderSidebar match={match} folders={value.folders} />
+                    )}
+                  </Context.Consumer>
+                )}
+              />
+              <Route path="/note/:noteId" render={() => <NoteSidebar />} />
+            </Switch>
+            <Switch id="main">
+              <Route
+                exact
+                path="/"
+                component={() => (
+                  <Context.Consumer>
+                    {(value) => (
+                      <MainPage
+                        notes={value.notes}
+                        onApiDelete={this.handleApiDelete}
+                      />
+                    )}
+                  </Context.Consumer>
+                )}
+              />
+              <Route
+                path="/folder/:folderId"
+                component={(match) => (
+                  <Context.Consumer>
+                    {(value) => (
+                      <FolderPage
+                        match={match}
+                        notes={value.notes}
+                        onApiDelete={this.handleApiDelete}
+                      />
+                    )}
+                  </Context.Consumer>
+                )}
+              />
+              <Route
+                path="/note/:noteId"
+                component={(match) => (
+                  <Context.Consumer>
+                    {(value) => (
+                      <NotePage
+                        match={match}
+                        notes={value.notes}
+                        onApiDelete={value.handleApiDelete}
+                      />
+                    )}
+                  </Context.Consumer>
+                )}
+              />
+            </Switch>
+          </div>
+        </Context.Provider>
       </div>
     );
   }
