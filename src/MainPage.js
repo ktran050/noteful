@@ -5,7 +5,7 @@ import Context from "./Context";
 class MainPage extends React.Component {
   render() {
     const notes = this.props.notes.map((note, index) => (
-      <Context.Consumer>
+      <Context.Consumer key={"consumer" + note.id + index}>
         {(value) => (
           <Note
             key={note.id + index}
