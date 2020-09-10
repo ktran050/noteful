@@ -28,7 +28,7 @@ class NotePage extends React.Component {
             </button>
           </div>
         );
-      }
+      } else return <p>Error drawing noteList</p>;
     });
     return (
       <div id="page">

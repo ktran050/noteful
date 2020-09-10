@@ -13,7 +13,7 @@ class FolderPage extends React.Component {
             id={note.id}
           />
         );
-      }
+      } else return <p>Error drawing notes.</p>;
     });
     return (
       <div id="page">
