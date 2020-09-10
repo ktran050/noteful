@@ -44,7 +44,7 @@ class App extends React.Component {
   handleApiDelete = (id) => {
     const url = `http://localhost:9090/notes/${id}`;
     fetch(url, { method: "DELETE" });
-    this.forceUpdate();
+    window.location.reload(false);
   };
   componentDidMount() {
     // call api for folders
