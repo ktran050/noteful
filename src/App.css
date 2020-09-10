@@ -16,7 +16,13 @@ a {
   border: solid 1px black;
 }
 
-#container > * {
+.style-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.style-container > * {
   border: solid 1px black;
   padding: 10px;
   display: flex;
@@ -24,19 +30,27 @@ a {
   margin: 20px;
 }
 
-#container > * > * > div {
+.style-container > * > * > div {
   border: solid 1px black;
   margin: 10px;
   text-align: center;
   padding: 5px;
 }
 
+button {
+  border: solid 1px black;
+  margin: 5px auto !important;
+  padding: 5px;
+  text-align: center;
+  display: inline-block;
+}
+
 #page {
-  width: 73vw;
+  width: 65vw;
 }
 
 #sidebar {
-  width: 22vw;
+  width: 20vw;
 }
 
 .active {
