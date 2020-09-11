@@ -3,8 +3,11 @@ import Note from "./Note";
 
 class FolderPage extends React.Component {
   render() {
-    const notes = this.props.notes.map((note, index) => {
-      if (note.folderId === this.props.match.match.params.folderId) {
+    const notes = this.props.notes
+      .filter(
+        (note) => note.folderId === this.props.match.match.params.folderId
+      )
+      .map((note, index) => {
         return (
           <Note
             key={note.id + index}
@@ -13,8 +16,7 @@ class FolderPage extends React.Component {
             id={note.id}
           />
         );
-      } else return <p>Error drawing notes.</p>;
-    });
+      });
     return (
       <div id="page">
         <header>
