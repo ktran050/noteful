@@ -7,8 +7,9 @@ class NotePage extends React.Component {
     this.props.match.history.push("/");
   };
   render() {
-    const notes = this.props.notes.map((note, index) => {
-      if (note.id === this.props.match.match.params.noteId) {
+    const notes = this.props.notes
+      .filter((note) => note.id === this.props.match.match.params.noteId)
+      .map((note, index) => {
         const noteID = note.id;
         return (
           <div key={index}>
@@ -28,8 +29,7 @@ class NotePage extends React.Component {
             </button>
           </div>
         );
-      } else return <p>Error drawing noteList</p>;
-    });
+      });
     return (
       <div id="page" className="style-target">
         <header>
