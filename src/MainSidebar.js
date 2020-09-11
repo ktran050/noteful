@@ -7,7 +7,7 @@ class MainSidebar extends React.Component {
       <Folder key={folder.id + index} name={folder.name} id={folder.id} />
     ));
     return (
-      <div id="sidebar">
+      <div id="sidebar" className="style-container">
         <header>
           <h2>Folders</h2>
         </header>

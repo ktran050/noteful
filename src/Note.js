@@ -8,7 +8,7 @@ class Note extends React.Component {
   render() {
     const noteID = this.props.id;
     return (
-      <div>
+      <div className="style-target">
         <Link to={`/note/${this.props.id}`}>
           <header>
             <h3>{this.props.name}</h3>

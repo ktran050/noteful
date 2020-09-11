@@ -31,7 +31,7 @@ class NotePage extends React.Component {
       } else return <p>Error drawing noteList</p>;
     });
     return (
-      <div id="page">
+      <div id="page" className="style-target">
         <header>
           <h2>Notes</h2>
         </header>

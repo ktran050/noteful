@@ -17,24 +17,41 @@ a {
 }
 
 .style-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.style-container > * {
   border: solid 1px black;
   padding: 10px;
   display: flex;
   flex-direction: column;
   margin: 20px;
+  align-items: center;
 }
 
-.style-container > * > * > div {
+.style-target {
   border: solid 1px black;
-  margin: 10px;
+  margin: 5px;
   text-align: center;
   padding: 5px;
+  display: block;
+  width: 90%;
+}
+
+#folder-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+}
+
+#note-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button {
@@ -43,6 +60,14 @@ button {
   padding: 5px;
   text-align: center;
   display: inline-block;
+  appearance: none;
+  background-color: white;
+}
+
+#sideContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #page {

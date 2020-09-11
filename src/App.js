@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 import MainPage from "./MainPage";
 import FolderPage from "./FolderPage";
 import NotePage from "./NotePage";
@@ -7,6 +7,7 @@ import Heading from "./Heading";
 import MainSidebar from "./MainSidebar";
 import FolderSidebar from "./FolderSidebar";
 import NoteSidebar from "./NoteSidebar";
+import AddFolder from "./AddFolder";
 import "./App.css";
 import Context from "./Context";
 
@@ -52,6 +53,9 @@ class App extends React.Component {
     // call api for notes
     this.updateNotes();
   }
+  navigate(path) {
+    this.props.history.push(path);
+  }
   render() {
     const contextValue = {
       notes: this.state.notes,
@@ -63,7 +67,7 @@ class App extends React.Component {
         <Heading />
         <Context.Provider value={contextValue}>
           <div id="container">
-            <div id="sideContent" className="style-container">
+            <div id="sideContent">
               <Switch id="sidebar">
                 <Route
                   exact
@@ -86,8 +90,8 @@ class App extends React.Component {
                 />
                 <Route path="/note/:noteId" render={() => <NoteSidebar />} />
               </Switch>
-              <button>Add Folder</button>
-              <button>Add Note</button>
+              <button className="style-target">Add Folder</button>
+              <button className="style-target">Add Note</button>
             </div>
             <div id="mainContent" className="style-container">
               <Switch id="main">
@@ -132,6 +136,11 @@ class App extends React.Component {
                       )}
                     </Context.Consumer>
                   )}
+                />
+                <Route
+                  exact
+                  path="/add-folder"
+                  component={() => <AddFolder />}
                 />
               </Switch>
             </div>
