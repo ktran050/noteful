@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import MainPage from "./MainPage";
 import FolderPage from "./FolderPage";
 import NotePage from "./NotePage";
@@ -90,7 +90,12 @@ class App extends React.Component {
                 />
                 <Route path="/note/:noteId" render={() => <NoteSidebar />} />
               </Switch>
-              <button className="style-target">Add Folder</button>
+              <button
+                onClick={(event) => this.navigate("/add-folder")}
+                className="style-target"
+              >
+                Add Folder
+              </button>
               <button className="style-target">Add Note</button>
             </div>
             <div id="mainContent" className="style-container">
@@ -152,3 +157,5 @@ class App extends React.Component {
 }
 
 export default App;
+
+// TODO: FIX ROUTE DIRECTING. Review how to push history/accessing history. Fix go back on notesidebar going to home then refreshing?
