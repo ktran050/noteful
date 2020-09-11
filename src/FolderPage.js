@@ -14,6 +14,7 @@ class FolderPage extends React.Component {
             name={note.name}
             modified={note.modified}
             id={note.id}
+            onApiDelete={this.props.onApiDelete}
           />
         );
       });
