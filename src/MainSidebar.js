@@ -10,7 +10,7 @@ class MainSidebar extends React.Component {
           <h2>Folders</h2>
         </header>
 
-        <Folders folders={this.props.folders} />
+        <Folders />
 
         <AddButtons />
       </div>
