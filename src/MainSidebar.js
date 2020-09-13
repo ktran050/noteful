@@ -1,17 +1,18 @@
 import React from "react";
-import Folder from "./Folder";
+import Folders from "./Folders";
+import AddButtons from "./AddButtons";
 
 class MainSidebar extends React.Component {
   render() {
-    const folders = this.props.folders.map((folder, index) => (
-      <Folder key={folder.id + index} name={folder.name} id={folder.id} />
-    ));
     return (
       <div id="sidebar" className="style-container">
         <header>
           <h2>Folders</h2>
         </header>
-        <div id="folder-list">{folders}</div>
+
+        <Folders folders={this.props.folders} />
+
+        <AddButtons />
       </div>
     );
   }
