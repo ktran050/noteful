@@ -123,4 +123,4 @@ class App extends React.Component {
 
 export default App;
 
-// TODO: FIX ROUTE DIRECTING. Review how to push history/accessing history. Fix go back on notesidebar going to home then refreshing?
+// TODO: Reloading with react methods (maybe rerender without page reload)

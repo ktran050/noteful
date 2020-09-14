@@ -1,14 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import Context from "./Context";
 class Heading extends React.Component {
+  handleClick(value) {
+    console.log("value: ", value);
+    value.history.push("/");
+    window.location.reload(false);
+  }
   render() {
     return (
-      <header>
-        <h1>
-          <Link to={"/"}>Noteful</Link>
-        </h1>
-      </header>
+      <Context.Consumer>
+        {(value) => (
+          <header onClick={() => this.handleClick(value)}>
+            <h1>Noteful</h1>
+          </header>
+        )}
+      </Context.Consumer>
     );
   }
 }
