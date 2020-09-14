@@ -5,4 +5,5 @@ export default React.createContext({
   folders: [],
   handleApiDelete: (id) => {},
   history: {},
+  match: {},
 });
