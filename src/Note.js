@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 class Note extends React.Component {
-  onApiDelete = (id) => {
-    this.props.onApiDelete(id);
+  onApiDelete = (event) => {
+    event.preventDefault();
+    this.props.onApiDelete(this.props.id);
+    window.location.reload(false);
   };
   render() {
-    const noteID = this.props.id;
     return (
       <div className="style-target">
         <Link to={`/note/${this.props.id}`}>
@@ -16,8 +17,8 @@ class Note extends React.Component {
         </Link>
         <p>{this.props.modified}</p>
         <button
-          onClick={() => {
-            this.onApiDelete(noteID);
+          onClick={(event) => {
+            this.onApiDelete(event);
           }}
         >
           Delete Note

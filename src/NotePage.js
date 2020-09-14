@@ -13,7 +13,11 @@ class NotePage extends React.Component {
             name={note.name}
             modified={note.modified}
             id={note.id}
-            onApiDelete={value.handleApiDelete}
+            onApiDelete={(id) => {
+              value.handleApiDelete(id);
+              value.history.push("/");
+            }}
+            history={value.history}
           />
         );
       });

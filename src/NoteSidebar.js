@@ -7,6 +7,7 @@ class NoteSidebar extends React.Component {
       <div
         onClick={() => {
           this.props.history.push("/");
+          window.location.reload(false);
         }}
         className="style-container"
       >

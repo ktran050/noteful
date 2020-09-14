@@ -51,7 +51,6 @@ class App extends React.Component {
   handleApiDelete = (id) => {
     const url = `http://localhost:9090/notes/${id}`;
     fetch(url, { method: "DELETE" });
-    window.location.reload(false);
   };
 
   /* Lifecycle methods */
@@ -67,6 +66,9 @@ class App extends React.Component {
       history: HISTORY,
       match: {},
     };
+    {
+      console.log(contextValue);
+    }
     return (
       <Context.Provider value={contextValue} className="App">
         <Heading />

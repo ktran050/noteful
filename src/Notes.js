@@ -14,6 +14,7 @@ class Notes extends React.Component {
               modified={note.modified}
               id={note.id}
               onApiDelete={value.handleApiDelete}
+              history={value.history}
             />
           );
         } else {
