@@ -98,16 +98,12 @@ class App extends React.Component {
               <Route exact path="/" component={MainPage} />
               <Route
                 path="/folder/:folderId"
-                component={(match) => (
-                  <Context.Consumer>
-                    {(value) => (
-                      <FolderPage
-                        match={match}
-                        notes={value.notes}
-                        onApiDelete={this.handleApiDelete}
-                      />
-                    )}
-                  </Context.Consumer>
+                render={(match) => (
+                  <Context.Provider
+                    value={Object.assign(contextValue, { match: match })}
+                  >
+                    <FolderPage />
+                  </Context.Provider>
                 )}
               />
               <Route
