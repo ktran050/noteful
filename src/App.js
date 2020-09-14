@@ -95,20 +95,7 @@ class App extends React.Component {
           </div>
           <div id="mainContent" className="style-container">
             <Switch id="main">
-              <Route
-                exact
-                path="/"
-                component={() => (
-                  <Context.Consumer>
-                    {(value) => (
-                      <MainPage
-                        notes={value.notes}
-                        onApiDelete={this.handleApiDelete}
-                      />
-                    )}
-                  </Context.Consumer>
-                )}
-              />
+              <Route exact path="/" component={MainPage} />
               <Route
                 path="/folder/:folderId"
                 component={(match) => (
