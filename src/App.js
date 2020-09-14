@@ -14,8 +14,6 @@ import MainSidebar from "./MainSidebar";
 import FolderSidebar from "./FolderSidebar";
 import NoteSidebar from "./NoteSidebar";
 
-import AddFolder from "./AddFolder";
-
 import "./App.css";
 
 class App extends React.Component {
@@ -55,9 +53,6 @@ class App extends React.Component {
     fetch(url, { method: "DELETE" });
     window.location.reload(false);
   };
-  navigate(path) {
-    this.props.history.push(path);
-  }
 
   /* Lifecycle methods */
   componentDidMount() {
@@ -108,19 +103,14 @@ class App extends React.Component {
               />
               <Route
                 path="/note/:noteId"
-                component={(match) => (
-                  <Context.Consumer>
-                    {(value) => (
-                      <NotePage
-                        match={match}
-                        notes={value.notes}
-                        onApiDelete={value.handleApiDelete}
-                      />
-                    )}
-                  </Context.Consumer>
+                render={(match) => (
+                  <Context.Provider
+                    value={Object.assign(contextValue, { match: match })}
+                  >
+                    <NotePage />
+                  </Context.Provider>
                 )}
               />
-              <Route exact path="/add-folder" component={() => <AddFolder />} />
             </Switch>
           </div>
         </main>

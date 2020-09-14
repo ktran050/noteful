@@ -13,7 +13,7 @@ class Notes extends React.Component {
               name={note.name}
               modified={note.modified}
               id={note.id}
-              onApiDelete={this.props.onApiDelete}
+              onApiDelete={value.handleApiDelete}
             />
           );
         } else {

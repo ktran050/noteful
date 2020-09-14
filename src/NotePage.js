@@ -1,41 +1,31 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Context from "./Context";
+import Note from "./Note";
 
 class NotePage extends React.Component {
-  onApiDelete = (id) => {
-    this.props.onApiDelete(id);
-    this.props.match.history.push("/");
-  };
-  render() {
-    const notes = this.props.notes
-      .filter((note) => note.id === this.props.match.match.params.noteId)
+  draw(value) {
+    const notes = value.notes
+      .filter((note) => note.id === value.match.match.params.noteId)
       .map((note, index) => {
-        const noteID = note.id;
         return (
-          <div key={index}>
-            <Link to={`/note/${note.id}`}>
-              <header>
-                <h3>{note.name}</h3>
-              </header>
-            </Link>
-            <p>{note.modified}</p>
-            <p>{note.content}</p>
-            <button
-              onClick={() => {
-                this.onApiDelete(noteID);
-              }}
-            >
-              Delete Note
-            </button>
-          </div>
+          <Note
+            key={note.id + index}
+            name={note.name}
+            modified={note.modified}
+            id={note.id}
+            onApiDelete={value.handleApiDelete}
+          />
         );
       });
+    return notes;
+  }
+  render() {
     return (
-      <div id="page" className="style-target">
+      <div id="page">
         <header>
           <h2>Notes</h2>
         </header>
-        <div id="note-list">{notes}</div>
+        <Context.Consumer>{(value) => this.draw(value)}</Context.Consumer>
       </div>
     );
   }
